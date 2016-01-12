@@ -1,0 +1,78 @@
+---
+title: "sgSEM v0.4.2"
+author: "Nicholas Wheeler, Wenyu Du, Abdulkerim Gok, Junheng Ma, Laura Bruckman, Roger French, Mohamed Elsaeiti"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+What is sgSEM v0.4.2 and what does it do?
+---------------------------
+
+The R package 'sgSEM v0.4.2' conducts a semi-gSEM statistical analysis (semi-supervised generalized structural equation modeling) on a dataframe of coincident observations of multiple continuous variables.  This analysis builds a pathway model by exploring a pool of domain knowledge guided candidate statistical relationships between each of the variable pairs, selecting the 'best fit' on the basis of the goodness-of-fit statistic, such as adjusted r-squared value which measures how successful the fit is in explaining the variation of the data.
+
+The semi-gSEM methodology is motivated by the analysis of systems that are experiencing degradation of some performance characteristic under exposure to a particular stressor.  In addition to the direct relation between the stressors and the system response sgSEM investigates protential connections between them through other covariates.
+
+To this goal, variables are separated into the categories of 'Stressors', 'Unit Level Responses', and 'Performance Level Responses'.  Relationships exceeding a specified criteria are sought backwards from the 'Performance Level Response' variable, through the 'Unit Level Responses', and back to the 'Stressors'.
+
+The resulting relationship diagram can be used to generate insight into the degradation pathways of the system under observation.  By identifying sequences of strong relationships that match well to prior domain knowledge, degradation pathways can be indicated which are good candidates to address for the improvement of the performance degradation characteristics.
+
+
+How does sgSEM v0.4.2 work?
+---------------------------
+
+The R package 'sgSEM v0.4.2' analyzes a dataframe including a column as a response variable and all other columns for stress variables. It is also of interest to mention that the stress variables are considered as explanatory variables in the beginning causal relationships and then as dependent variables.  In the current version all variables are required to be continuous.
+
+The function 'sgSEM()' takes this dataframe as the main input, along with optional arguments specifying the column names of the stress and performance response variables.
+
+Starting with the performance response variable and the first of the unit level response variables, the two variables' data are fit with each of the following five functional forms that appear most frequently in degradation science: simple linear, quadratic, simple quadratic, exponential, and logarithmic.  The 'best' of these functional forms is chosen on the specific criterion of the adjusted r-squared value.
+
+The 'sgSEM()' function outputs an R object featuring a 'plot()' method that generates a flow chart style diagram, detailing the relevant characteristics of the uncovered relationships between variables.
+
+
+Install and load the package
+--------------------------
+
+After downloading the package file "sgSEM_0.4.2.tar.gz", put it in your preferred working directory and run both of the following lines:
+```{r, eval=FALSE}
+install.packages("sgSEM_0.4.2.tar.gz", repos = NULL, type = "source")
+library(sgSEM)
+```
+
+The data set is a study of photodegradation of acrylic polymer. In this work, polymeric samples were exposed to different levels of light exposures and resulting optical changes were determined through optical spectroscopy. *YI* (yellowness index) is the performance level response and all other columns in the data set *IrradTot* (total applied irradiance), *IAD1*, *IAD2*, *IAD2p*, and *IAD3*  are considered as stress variables,which are also considered as response variables in some causal relationships. That is to induced absorbance to dose values extracted from optical absorbance spectra as single metrics and used as intermediate unit level response variables in the sgSEM analysis. 
+
+Example code for sgSEM v0.4.2
+---------------------------
+
+```{r, message=FALSE, eval=FALSE}
+
+## Load the acrylic data set
+data(acrylic)
+
+## Run semi-gSEM
+ans = sgSEM(acrylic, stressor= c("IrradTot", *IAD1*, *IAD2*, *IAD2p*, and *IAD3*), response="YI")
+
+## Plot result
+plot(ans)
+ 
+## Plot result with different R-sqr cutoff
+plot(ans, cutoff = 0.2)
+
+```
+
+Example output for sgSEM v0.4.2
+--------------------------
+
+![YI is the response and all other variables are considered as stressors](p3.png)
+
+
+Sources
+------------
+1. Bruckman, Laura S., Nicholas R. Wheeler, Junheng Ma, Ethan Wang, Carl K. Wang, Ivan Chou, Jiayang Sun, and Roger H. French. "Statistical and Domain Analytics Applied to PV Module Lifetime and Degradation Science." IEEE Access 1 (2013): 384-403. doi:10.1109/ACCESS.2013.2267611.       
+
+2. Bruckman, Laura S., Nicholas R. Wheeler, Ian V. Kidd, Jiayang Sun, and Roger H. French. "Photovoltaic Lifetime and Degradation Science Statistical Pathway Development: Acrylic Degradation." In SPIE Solar Energy+ Technology, 8825:88250D-8. International Society for Optics and Photonics, 2013. doi:10.1117/12.2024717.
+
+

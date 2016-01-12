@@ -1,0 +1,14 @@
+acrylic                 A data frame of an acrylic degradation
+                        experiment
+genInit                 Generate initial values for nls function
+path                    Extract Path Coefficients
+plot.sgSEMp1            Plotting of Principle 1 of Semi-gSEM
+plot.sgSEMp2            Plotting of Principle 2 of Semi-gSEM
+sgSEM                   Semi-supervised Generalized Structure Equation
+                        Modeling
+sgSEMp1                 Semi-supervised Generalized Structural Equation
+                        Modeling (sgSEM) - Principle 1
+sgSEMp2                 Semi-supervised Generalized Structural Equation
+                        Modeling (sgSEM) - Principle 2
+summary.sgSEMp1         Summary of Semi-gSEM
+summary.sgSEMp2         Summary of Semi-gSEM

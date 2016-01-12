@@ -1,0 +1,211 @@
+ls()
+?sem
+library(sem)
+obs.var2.5=("Ach1", "Ach2", "Amb1", "Amb2", "Amb3")
+obs.var25=("Ach1", "Ach2", "Amb1", "Amb2", "Amb3")
+obs.var2.5=c("Ach1", "Ach2", "Amb1", "Amb2", "Amb3")
+R.prob2.5= matrix(c(1,0.6,0.3,0.2,0.2))
+R.prob2.5= matrix(c(1,0.6,0.3,0.2,0.2, 0.6,1,0.2,0.3,0.1,0.3,0.2,1,0.7,0.6,0.2,0.3,0.7,1,0.5,0.2,0.1,0.6,0.5,1))
+R.prob2.5
+R.prob2.5= matrix(c(1,0.6,0.3,0.2,0.2, 0.6,1,0.2,0.3,0.1,0.3,0.2,1,0.7,0.6,0.2,0.3,0.7,1,0.5,0.2,0.1,0.6,0.5,1), ncol=5, byrow=T)
+R.prob2.5
+model2.5=matrix(c("Ambit-> Amb1", "a", NA,
+"Ambit-> Amb2", "b", NA,
+"Ambit-> Amb3", "c", NA,
+"Achieve-> Ach1", "d", NA,
+"Achieve-> Ach2", "e", NA,
+"Ambit-> Achieve", "f", NA,
+"Amb1<->Amb1", "u", NA,
+"Amb2<->Amb2", "v", NA,
+"Amb3<->Amb3", "w", NA,
+"Ach1 <-> Ach1", "x", NA,
+"Ach2 <-> Ach2", "y", NA,
+"Achieve<-> Achieve", "NA",1,
+"Ambit<-> Ambit", "NA",1), ncol=3, byrow=T)
+model2.5
+sem2.5 = sem(model2.5, R.prob2.5, 60, obs.var2.5)
+dim(obs.var2.5)
+sem2.5=
+sem(model2.5,R.prob2.5,60,
+obs.var2.5)
+obs.var2.5
+sem2.5= sem(model2.5,R.prob2.5,60, obs.var2.5)
+summary(sem2.5,digits=3)
+sem2.5 = sem(model2.5, R.prob2.5, obs.var2.5)
+sem2.5 = sem(model2.5, R.prob2.5, 25, obs.var2.5)
+sem2.5 = sem(model2.5, R.prob2.5, 5, obs.var2.5)
+sem2.5= sem(model2.5,R.prob2.5,60, obs.var2.5)
+obs.var2.5
+ls()
+obs.var2.5 = c('Ach1',  'Ach2',  'Amb1',  'Amb2',  'Amb3')
+obs.var2.5
+sem2.5= sem(model2.5,R.prob2.5,60, obs.var2.5)
+sem2.5= sem(model2.5, R.prob2.5, 60, obs.var2.5)
+R.prob2.5 = matrix(c(
+1.00 ,  .60  , .30,  .20,   .20,
+.60,  1.00,   .20,   .30,   .10,
+.30,   .20,  1.00,   .70,   .60 ,
+.20,   .30,   .70,  1.00,   .50,
+.20,   .10,   .60,  .50,  1.00), ncol=5,byrow=TRUE)
+#correlated factors structure (ambition <-> Achievement)
+model2.5=matrix(c(
+'Ambit ->  Amb1',      'a', NA,
+'Ambit -> Amb2' ,      'b', NA,
+'Ambit -> Amb3' ,      'c', NA,
+'Achieve -> Ach1',     'd', NA,
+'Achieve -> Ach2',     'e', NA,
+'Ambit <-> Achieve',   'f', NA,
+'Amb1 <-> Amb1' ,      'u', NA,
+'Amb2 <-> Amb2' ,      'v', NA,
+'Amb3 <-> Amb3' ,      'w', NA,
+'Ach1 <-> Ach1' ,      'x', NA,
+'Ach2 <-> Ach2' ,      'y', NA,
+'Achieve <-> Achieve',  NA, 1,
+'Ambit <-> Ambit',      NA, 1),
+ncol=3, byrow=TRUE)
+sem2.5= sem(model2.5,R.prob2.5,60, obs.var2.5)
+R.prob2.5 = matrix(c(
+1.00 ,  .60  , .30,  .20,   .20,
+.60,  1.00,   .20,   .30,   .10,
+.30,   .20,  1.00,   .70,   .60 ,
+.20,   .30,   .70,  1.00,   .50,
+.20,   .10,   .60,  .50,  1.00), ncol=5,byrow=TRUE)
+#correlated factors structure (ambition <-> Achievement)
+model2.5=matrix(c(
+'Ambit ->  Amb1',      'a', NA,
+'Ambit -> Amb2' ,      'b', NA,
+'Ambit -> Amb3' ,      'c', NA,
+'Achieve -> Ach1',     'd', NA,
+'Achieve -> Ach2',     'e', NA,
+'Ambit <-> Achieve',   'f', NA,
+'Amb1 <-> Amb1' ,      'u', NA,
+'Amb2 <-> Amb2' ,      'v', NA,
+'Amb3 <-> Amb3' ,      'w', NA,
+'Ach1 <-> Ach1' ,      'x', NA,
+'Ach2 <-> Ach2' ,      'y', NA,
+'Achieve <-> Achieve',  NA, 1,
+'Ambit <-> Ambit',      NA, 1),
+ncol=3, byrow=TRUE)
+sem2.5= sem(model2.5,R.prob2.5,5, obs.var2.5)
+R.prob2.5 = matrix(c(
+1.00 ,  .60  , .30,  .20,   .20,
+.60,  1.00,   .20,   .30,   .10,
+.30,   .20,  1.00,   .70,   .60 ,
+.20,   .30,   .70,  1.00,   .50,
+.20,   .10,   .60,  .50,  1.00), ncol=5,byrow=TRUE)
+#correlated factors structure (ambition <-> Achievement)
+model2.5=matrix(c(
+'Ambit ->  Amb1',      'a', NA,
+'Ambit -> Amb2' ,      'b', NA,
+'Ambit -> Amb3' ,      'c', NA,
+'Achieve -> Ach1',     'd', NA,
+'Achieve -> Ach2',     'e', NA,
+'Ambit <-> Achieve',   'f', NA,
+'Amb1 <-> Amb1' ,      'u', NA,
+'Amb2 <-> Amb2' ,      'v', NA,
+'Amb3 <-> Amb3' ,      'w', NA,
+'Ach1 <-> Ach1' ,      'x', NA,
+'Ach2 <-> Ach2' ,      'y', NA,
+'Achieve <-> Achieve',  NA, 1,
+'Ambit <-> Ambit',      NA, 1),
+ncol=3, byrow=TRUE)
+sem2.5= sem(model2.5,R.prob2.5)
+sem2.51= sem(model2.51,R.prob2.5,100, obs.var2.5)
+R.prob2.5 = matrix(c(
+1.00 ,  .60  , .30,  .20,   .20,
+.60,  1.00,   .20,   .30,   .10,
+.30,   .20,  1.00,   .70,   .60 ,
+.20,   .30,   .70,  1.00,   .50,
+.20,   .10,   .60,  .50,  1.00), ncol=5,byrow=TRUE)
+#correlated factors structure (ambition <-> Achievement)
+model2.5=matrix(c(
+'Ambit ->  Amb1',      'a', NA,
+'Ambit -> Amb2' ,      'b', NA,
+'Ambit -> Amb3' ,      'c', NA,
+'Achieve -> Ach1',     'd', NA,
+'Achieve -> Ach2',     'e', NA,
+'Ambit <-> Achieve',   'f', NA,
+'Amb1 <-> Amb1' ,      'u', NA,
+'Amb2 <-> Amb2' ,      'v', NA,
+'Amb3 <-> Amb3' ,      'w', NA,
+'Ach1 <-> Ach1' ,      'x', NA,
+'Ach2 <-> Ach2' ,      'y', NA,
+'Achieve <-> Achieve',  NA, 1,
+'Ambit <-> Ambit',      NA, 1),
+ncol=3, byrow=TRUE)
+sem2.5= sem(model2.5,R.prob2.5,60, obs.var2.5)
+Klein
+names(Klein)
+?sem
+library(sem)
+?sem
+?readMoments
+?sgSEM
+library(sgSEM)
+install.packages(sgSEM)
+install.packages("sgSEM_0.4.1.tar.gz", repos = NULL, type="source")
+install.packages("sgSEM_0.4.2.tar.gz", repos = NULL, type="source")
+?devtools
+??devtools
+pkgname<- "sgSEM"
+pkgname
+sessionInfo(sgSEM)
+sessionInfo()
+install.packages(sgSEM)
+library("divtools")
+library("devtools")
+install.packages("devtools")
+sessionInfo()
+installed.packages()
+installed.packages(devtools)
+installed.packages(devtools="high")
+?devtools
+library("devtools")
+install.packages(c("devtools", "roxygen2", "knitr"))
+library("devtools")
+library("devtools")
+?devtools
+warnings()
+rm(list = ls())
+remove.packages(devtools)
+remove.packages("devtools")
+install.packages(devtools, dependencies = TRUE)
+install.packages("devtools", dependencies = TRUE)
+library(devtools)
+find_rtools()
+install.packages("Rtools")
+library(devtools)
+?"devtools"
+library(segmented)
+segmented.lm
+segmented.lm
+library(segmented)
+segmented.lm
+y= rexp(100, rate=1)
+plot(y)
+x= rexp(100, rate=1)
+plot(x,y)
+plot(x)
+plot(y)
+plot(y,x)
+plot(x,y)
+x= rexp(10, rate=1)
+plot(x)
+plot(,x)
+plot(x,)
+rm(ls())
+rm(list=ls())
+install.packages(c("devtools", "roxygen2", "testthat", "knitr"))
+install.packages(c("devtools", "roxygen2", "testthat", "knitr"))
+install.packages("rstudioapi")
+library(devtools)
+has_devel()
+library(roxygen2)
+library(testthat)
+devtools::session_info()
+library(knitr)
+devtools::session_info()
+getwd()
+setwd("C:/Users/mohamed/Desktop/sgSEMp3/R")
+plot
+names(acrylic1)

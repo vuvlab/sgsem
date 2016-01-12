@@ -1,0 +1,642 @@
+
+R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "sgSEM"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('sgSEM')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("genInit")
+> ### * genInit
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: genInit
+> ### Title: Generate initial values for nls function
+> ### Aliases: genInit
+> 
+> ### ** Examples
+> 
+> genInit(list(a1 = c(0,2), a2 = c(4,5), a3 = c(-1, -0.5)), k = 20 )
+          a1       a2         a3
+1  0.5310173 4.934705 -0.5895269
+2  0.7442478 4.212143 -0.6764699
+3  1.1457067 4.651674 -0.6085336
+4  1.8164156 4.125555 -0.7234818
+5  0.4033639 4.267221 -0.7351402
+6  1.7967794 4.386114 -0.6053219
+7  1.8893505 4.013390 -0.9883344
+8  1.3215956 4.382388 -0.7613850
+9  1.2582281 4.869691 -0.6338431
+10 0.1235725 4.340349 -0.6536342
+11 0.4119491 4.482080 -0.7611902
+12 0.3531135 4.599566 -0.5693953
+13 1.3740457 4.493541 -0.7809514
+14 0.7682074 4.186218 -0.8776014
+15 1.5396828 4.827373 -0.9646605
+16 0.9953985 4.668467 -0.9502669
+17 1.4352370 4.794240 -0.8418641
+18 1.9838122 4.107944 -0.7406829
+19 0.7600704 4.723711 -0.6689975
+20 1.5548904 4.411274 -0.7965849
+> 
+> 
+> 
+> cleanEx()
+> nameEx("path")
+> ### * path
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: path
+> ### Title: Extract Path Coefficients
+> ### Aliases: path
+> 
+> ### ** Examples
+> 
+> ##' ## Load the sample acrylic data set
+> data(acrylic)
+> 
+> ## Run semi-gSEM principle one
+> ans <- sgSEMp1(acrylic, stressor = "IrradTot", response = "YI")
+Working on  YI ~ IrradTot 
+Working on  YI ~ IAD1 
+Working on  YI ~ IAD2 
+Working on  YI ~ IAD2p 
+Working on  YI ~ IAD3 
+Working on  IAD1 ~ IrradTot 
+Working on  IAD1 ~ IAD2 
+Working on  IAD1 ~ IAD2p 
+Working on  IAD1 ~ IAD3 
+Working on  IAD2 ~ IrradTot 
+Working on  IAD2 ~ IAD1 
+Working on  IAD2 ~ IAD2p 
+Working on  IAD2 ~ IAD3 
+Working on  IAD2p ~ IrradTot 
+Working on  IAD2p ~ IAD1 
+Working on  IAD2p ~ IAD2 
+Working on  IAD2p ~ IAD3 
+Working on  IAD3 ~ IrradTot 
+Working on  IAD3 ~ IAD1 
+Working on  IAD3 ~ IAD2 
+Working on  IAD3 ~ IAD2p 
+> 
+> ## Extract relations between IrradTot and IAD2
+> cf <- path(ans, from = "IrradTot", to = "IAD2")
+Model type: Quad 
+Model equation (round = 3):
+[1] "IAD2 = -0.001 - 0 * IrradTot - 0 * IrradTot^2"
+> print(cf)
+$model
+
+Call:
+lm(formula = "IAD2~IrradTot+I(IrradTot^2)", data = x)
+
+Coefficients:
+  (Intercept)       IrradTot  I(IrradTot^2)  
+   -8.417e-04      4.092e-05     -1.085e-07  
+
+
+$model.print
+[1] "IAD2 = -0.001 - 0 * IrradTot - 0 * IrradTot^2"
+
+$coefs
+  (Intercept)      IrradTot I(IrradTot^2) 
+       -0.001         0.000         0.000 
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plot.sgSEMp1")
+> ### * plot.sgSEMp1
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plot.sgSEMp1
+> ### Title: Plotting of Principle 1 of Semi-gSEM
+> ### Aliases: plot.sgSEMp1
+> 
+> ### ** Examples
+> 
+> # Load acrylic data set
+> data(acrylic)
+> # Build a semi-gSEM model with principle 1
+> ans <- sgSEMp1(acrylic)
+Working on  YI ~ IrradTot 
+Working on  YI ~ IAD1 
+Working on  YI ~ IAD2 
+Working on  YI ~ IAD2p 
+Working on  YI ~ IAD3 
+Working on  IAD1 ~ IrradTot 
+Working on  IAD1 ~ IAD2 
+Working on  IAD1 ~ IAD2p 
+Working on  IAD1 ~ IAD3 
+Working on  IAD2 ~ IrradTot 
+Working on  IAD2 ~ IAD1 
+Working on  IAD2 ~ IAD2p 
+Working on  IAD2 ~ IAD3 
+Working on  IAD2p ~ IrradTot 
+Working on  IAD2p ~ IAD1 
+Working on  IAD2p ~ IAD2 
+Working on  IAD2p ~ IAD3 
+Working on  IAD3 ~ IrradTot 
+Working on  IAD3 ~ IAD1 
+Working on  IAD3 ~ IAD2 
+Working on  IAD3 ~ IAD2p 
+> # Plot the network model with adjusted-R-squred of 0.1
+> plot(ans, cutoff = 0.1)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plot.sgSEMp2")
+> ### * plot.sgSEMp2
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plot.sgSEMp2
+> ### Title: Plotting of Principle 2 of Semi-gSEM
+> ### Aliases: plot.sgSEMp2
+> ### Keywords: 2, Semi-gSEM, diagram network pathway principle
+> 
+> ### ** Examples
+> 
+> data(acrylic)
+> ans <- sgSEMp2(acrylic)
+> plot(ans, cutoff = 0.2)
+The cutoff value is lower than all of the adjusted R-sqr values: Only solid lines
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sgSEMp1")
+> ### * sgSEMp1
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sgSEMp1
+> ### Title: Semi-supervised Generalized Structural Equation Modeling (sgSEM)
+> ###   - Principle 1
+> ### Aliases: sgSEMp1
+> 
+> ### ** Examples
+> 
+> ## Load the sample acrylic data set
+> data(acrylic)
+> 
+> ## Run semi-gSEM principle one
+> ans <- sgSEMp1(acrylic, stressor = "IrradTot", response = "YI", nlsInits = genInit(k = 20))
+Working on  YI ~ IrradTot 
+Working on  YI ~ IAD1 
+Working on  YI ~ IAD2 
+Working on  YI ~ IAD2p 
+Working on  YI ~ IAD3 
+Working on  IAD1 ~ IrradTot 
+Working on  IAD1 ~ IAD2 
+Working on  IAD1 ~ IAD2p 
+Working on  IAD1 ~ IAD3 
+Working on  IAD2 ~ IrradTot 
+Working on  IAD2 ~ IAD1 
+Working on  IAD2 ~ IAD2p 
+Working on  IAD2 ~ IAD3 
+Working on  IAD2p ~ IrradTot 
+Working on  IAD2p ~ IAD1 
+Working on  IAD2p ~ IAD2 
+Working on  IAD2p ~ IAD3 
+Working on  IAD3 ~ IrradTot 
+Working on  IAD3 ~ IAD1 
+Working on  IAD3 ~ IAD2 
+Working on  IAD3 ~ IAD2p 
+> 
+> ## Plot the result
+> plot(ans)
+> 
+> ## Plot result with different R-sqr cutoff
+> plot(ans, cutoff = 0.2)
+> 
+> ## Summary
+> summary(ans)
+sgSEM principle 1 Done 
+
+Stressor: IrradTot 
+Response: YI 
+Intermediate variables: IAD1 IAD2 IAD2p IAD3 
+
+Chosen models:
+ [1] "IrradTot ---> YI | Quad (Adjusted R-square =  0.3315 )"   
+ [2] "IAD1 ---> YI | Exp (Adjusted R-square =  0.03537 )"       
+ [3] "IAD2 ---> YI | Quad (Adjusted R-square =  0.0437 )"       
+ [4] "IAD2p ---> YI | Quad (Adjusted R-square =  0.02149 )"     
+ [5] "IAD3 ---> YI | Quad (Adjusted R-square =  0.06016 )"      
+ [6] "IrradTot ---> IAD1 | Quad (Adjusted R-square =  0.02349 )"
+ [7] "IAD2 ---> IAD1 | nls (Adjusted R-square =  0.68659 )"     
+ [8] "IAD2p ---> IAD1 | nls (Adjusted R-square =  0.53583 )"    
+ [9] "IAD3 ---> IAD1 | Quad (Adjusted R-square =  0.22168 )"    
+[10] "IrradTot ---> IAD2 | Quad (Adjusted R-square =  0.00217 )"
+[11] "IAD1 ---> IAD2 | Quad (Adjusted R-square =  0.76914 )"    
+[12] "IAD2p ---> IAD2 | SL (Adjusted R-square =  0.96692 )"     
+[13] "IAD3 ---> IAD2 | Quad (Adjusted R-square =  0.56715 )"    
+[14] "IAD1 ---> IAD2p | Quad (Adjusted R-square =  0.63526 )"   
+[15] "IAD2 ---> IAD2p | SL (Adjusted R-square =  0.96692 )"     
+[16] "IAD3 ---> IAD2p | Quad (Adjusted R-square =  0.6513 )"    
+[17] "IrradTot ---> IAD3 | SL (Adjusted R-square =  0.03296 )"  
+[18] "IAD1 ---> IAD3 | Quad (Adjusted R-square =  0.1214 )"     
+[19] "IAD2 ---> IAD3 | Quad (Adjusted R-square =  0.26906 )"    
+[20] "IAD2p ---> IAD3 | Quad (Adjusted R-square =  0.31787 )"   
+> 
+> ## Extract relations between IrradTot and IAD2
+> cf <- path(ans, from = "IrradTot", to = "IAD2")
+Model type: Quad 
+Model equation (round = 3):
+[1] "IAD2 = -0.001 - 0 * IrradTot - 0 * IrradTot^2"
+> print(cf)
+$model
+
+Call:
+lm(formula = "IAD2~IrradTot+I(IrradTot^2)", data = x)
+
+Coefficients:
+  (Intercept)       IrradTot  I(IrradTot^2)  
+   -8.417e-04      4.092e-05     -1.085e-07  
+
+
+$model.print
+[1] "IAD2 = -0.001 - 0 * IrradTot - 0 * IrradTot^2"
+
+$coefs
+  (Intercept)      IrradTot I(IrradTot^2) 
+       -0.001         0.000         0.000 
+
+> 
+> ## Print three components of the result
+> ans$table
+   Response Variable Model      R-Sqr   adj-R-Sqr        Pval1         Pval2
+1        YI IrradTot  Quad 0.33525556 0.331499944 2.132394e-28  1.826289e-12
+2        YI     IAD1   Exp 0.03808109 0.035371464 1.529483e-03  2.073161e-04
+3        YI     IAD2  Quad 0.04907674 0.043704293 1.431002e-90  3.814553e-05
+4        YI    IAD2p  Quad 0.02698542 0.021488159 1.365597e-93  4.448669e-03
+5        YI     IAD3  Quad 0.06543826 0.060158255 3.121655e-98  1.002384e-06
+6      IAD1 IrradTot  Quad 0.02897571 0.023489699 5.430656e-03  9.107860e-03
+7      IAD1     IAD2   nls 0.68835204 0.686591312           NA            NA
+8      IAD1    IAD2p   nls 0.53843653 0.535828822           NA            NA
+9      IAD1     IAD3  Quad 0.22605745 0.221684897 2.565500e-13  1.820011e-21
+10     IAD2 IrradTot  Quad 0.00777420 0.002168405 4.918092e-01  9.715753e-02
+11     IAD2     IAD1  Quad 0.77044148 0.769144540 2.987363e-06  1.970884e-99
+12     IAD2    IAD2p    SL 0.96701676 0.966923849 3.072881e-20 4.273921e-265
+13     IAD2     IAD3  Quad 0.56958154 0.567149794 1.342285e-01  1.440492e-66
+14    IAD2p     IAD1  Quad 0.63730725 0.635258134 1.359615e-07  5.592773e-64
+15    IAD2p     IAD2    SL 0.96701676 0.966923849 3.221302e-20 4.273921e-265
+16    IAD2p     IAD3  Quad 0.65325756 0.651298566 1.714468e-01  3.139414e-83
+17     IAD3 IrradTot    SL 0.03567688 0.032960473 1.617377e-01  3.323528e-04
+18     IAD3     IAD1  Quad 0.12633668 0.121400726 7.404191e-01  4.187051e-10
+19     IAD3     IAD2  Quad 0.27316969 0.269063300 8.217705e-01  6.352797e-19
+20     IAD3    IAD2p  Quad 0.32170590 0.317873729 1.502270e-01  8.859373e-21
+          Pval3
+1  3.232769e-05
+2            NA
+3  1.658610e-02
+4  1.314439e-01
+5  6.645170e-04
+6  2.663371e-03
+7            NA
+8            NA
+9  4.400973e-12
+10 1.135885e-01
+11 5.422270e-31
+12           NA
+13 2.439203e-43
+14 3.926271e-23
+15           NA
+16 2.219237e-55
+17           NA
+18 2.402152e-02
+19 2.127755e-02
+20 3.536145e-03
+> ans$bestModels
+         IrradTot YI     IAD1   IAD2   IAD2p  IAD3  
+IrradTot NA       "Quad" "Quad" "Quad" "-1"   "SL"  
+YI       NA       NA     NA     NA     NA     NA    
+IAD1     NA       "Exp"  NA     "Quad" "Quad" "Quad"
+IAD2     NA       "Quad" "nls"  NA     "SL"   "Quad"
+IAD2p    NA       "Quad" "nls"  "SL"   NA     "Quad"
+IAD3     NA       "Quad" "Quad" "Quad" "Quad" NA    
+attr(,"Step")
+IrradTot       YI     IAD1     IAD2    IAD2p     IAD3 
+       1        0        1        1        1        1 
+attr(,"diag.Step")
+         IrradTot  YI IAD1 IAD2 IAD2p IAD3
+IrradTot      Inf   1    2    2   Inf    2
+YI            Inf Inf  Inf  Inf   Inf  Inf
+IAD1          Inf   1  Inf    2     2    2
+IAD2          Inf   1    2  Inf     2    2
+IAD2p         Inf   1    2    2   Inf    2
+IAD3          Inf   1    2    2     2  Inf
+> ans$allModels
+, , SL
+
+         IrradTot YI      IAD1    IAD2    IAD2p   IAD3   
+IrradTot NA       List,12 List,12 List,12 List,12 List,12
+YI       NA       NA      NA      NA      NA      NA     
+IAD1     NA       List,12 NA      List,12 List,12 List,12
+IAD2     NA       List,12 List,12 NA      List,12 List,12
+IAD2p    NA       List,12 List,12 List,12 NA      List,12
+IAD3     NA       List,12 List,12 List,12 List,12 NA     
+
+, , Quad
+
+         IrradTot YI      IAD1    IAD2    IAD2p   IAD3   
+IrradTot NA       List,12 List,12 List,12 List,12 List,12
+YI       NA       NA      NA      NA      NA      NA     
+IAD1     NA       List,12 NA      List,12 List,12 List,12
+IAD2     NA       List,12 List,12 NA      List,12 List,12
+IAD2p    NA       List,12 List,12 List,12 NA      List,12
+IAD3     NA       List,12 List,12 List,12 List,12 NA     
+
+, , SQuad
+
+         IrradTot YI      IAD1    IAD2    IAD2p   IAD3   
+IrradTot NA       List,12 List,12 List,12 List,12 List,12
+YI       NA       NA      NA      NA      NA      NA     
+IAD1     NA       List,12 NA      List,12 List,12 List,12
+IAD2     NA       List,12 List,12 NA      List,12 List,12
+IAD2p    NA       List,12 List,12 List,12 NA      List,12
+IAD3     NA       List,12 List,12 List,12 List,12 NA     
+
+, , Exp
+
+         IrradTot YI      IAD1    IAD2    IAD2p   IAD3   
+IrradTot NA       List,12 List,12 List,12 List,12 List,12
+YI       NA       NA      NA      NA      NA      NA     
+IAD1     NA       List,12 NA      List,12 List,12 List,12
+IAD2     NA       List,12 List,12 NA      List,12 List,12
+IAD2p    NA       List,12 List,12 List,12 NA      List,12
+IAD3     NA       List,12 List,12 List,12 List,12 NA     
+
+, , Log
+
+         IrradTot YI IAD1 IAD2 IAD2p IAD3
+IrradTot NA       NA NA   NA   NA    NA  
+YI       NA       NA NA   NA   NA    NA  
+IAD1     NA       NA NA   NA   NA    NA  
+IAD2     NA       NA NA   NA   NA    NA  
+IAD2p    NA       NA NA   NA   NA    NA  
+IAD3     NA       NA NA   NA   NA    NA  
+
+, , nls
+
+         IrradTot YI     IAD1   IAD2   IAD2p  IAD3  
+IrradTot NA       NA     NA     NA     NA     NA    
+YI       NA       NA     NA     NA     NA     NA    
+IAD1     NA       List,6 NA     List,6 NA     List,6
+IAD2     NA       List,6 List,6 NA     List,6 List,6
+IAD2p    NA       NA     List,6 List,6 NA     List,6
+IAD3     NA       NA     NA     NA     NA     NA    
+
+, , CPSLSL
+
+         IrradTot YI IAD1 IAD2 IAD2p IAD3
+IrradTot NA       NA NA   NA   NA    NA  
+YI       NA       NA NA   NA   NA    NA  
+IAD1     NA       NA NA   NA   NA    NA  
+IAD2     NA       NA NA   NA   NA    NA  
+IAD2p    NA       NA NA   NA   NA    NA  
+IAD3     NA       NA NA   NA   NA    NA  
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("sgSEMp2")
+> ### * sgSEMp2
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: sgSEMp2
+> ### Title: Semi-supervised Generalized Structural Equation Modeling (sgSEM)
+> ###   - Principle 2
+> ### Aliases: sgSEMp2
+> 
+> ### ** Examples
+> 
+> data(acrylic)
+> ans <- sgSEMp2(acrylic)
+> ans$res.print
+   Response Variable                                      Model     R-Sqr
+2        YI IrradTot YI ~ IrradTot + IAD1 + IAD2 + IAD2p + IAD3 0.4103957
+3        YI     IAD1 YI ~ IrradTot + IAD1 + IAD2 + IAD2p + IAD3 0.4103957
+4        YI     IAD2 YI ~ IrradTot + IAD1 + IAD2 + IAD2p + IAD3 0.4103957
+5        YI    IAD2p YI ~ IrradTot + IAD1 + IAD2 + IAD2p + IAD3 0.4103957
+6        YI     IAD3 YI ~ IrradTot + IAD1 + IAD2 + IAD2p + IAD3 0.4103957
+7      IAD1 IrradTot      IAD1 ~ IrradTot + IAD2 + IAD2p + IAD3 0.8612075
+8      IAD1     IAD2      IAD1 ~ IrradTot + IAD2 + IAD2p + IAD3 0.8612075
+9      IAD1    IAD2p      IAD1 ~ IrradTot + IAD2 + IAD2p + IAD3 0.8612075
+10     IAD1     IAD3      IAD1 ~ IrradTot + IAD2 + IAD2p + IAD3 0.8612075
+11     IAD2     IAD1                 IAD2 ~ IAD1 + IAD2p + IAD3 0.9906135
+12     IAD2    IAD2p                 IAD2 ~ IAD1 + IAD2p + IAD3 0.9906135
+13     IAD2     IAD3                 IAD2 ~ IAD1 + IAD2p + IAD3 0.9906135
+14    IAD2p     IAD1                 IAD2p ~ IAD1 + IAD2 + IAD3 0.9871930
+15    IAD2p     IAD2                 IAD2p ~ IAD1 + IAD2 + IAD3 0.9871930
+16    IAD2p     IAD3                 IAD2p ~ IAD1 + IAD2 + IAD3 0.9871930
+17     IAD3 IrradTot      IAD3 ~ IrradTot + IAD1 + IAD2 + IAD2p 0.3688071
+18     IAD3     IAD1      IAD3 ~ IrradTot + IAD1 + IAD2 + IAD2p 0.3688071
+19     IAD3     IAD2      IAD3 ~ IrradTot + IAD1 + IAD2 + IAD2p 0.3688071
+20     IAD3    IAD2p      IAD3 ~ IrradTot + IAD1 + IAD2 + IAD2p 0.3688071
+   adj-R-Sqr          Pval PvalRank p1ff     r2mark   markrank
+2  0.4019967  3.627808e-32        1 quad 0.33525556 0.33149994
+3  0.4019967  8.585384e-02        5 <NA>         NA         NA
+4  0.4019967  1.131760e-07        3  exp 0.03808109 0.03537146
+5  0.4019967  2.717981e-08        2 quad 0.04907674 0.04370429
+6  0.4019967  3.552230e-02        4 quad 0.02698542 0.02148816
+7  0.8596304  3.039932e-02        4 quad 0.02897571 0.02348970
+8  0.8596304  1.201812e-94        1 <NA>         NA         NA
+9  0.8596304  2.351915e-66        2 <NA>         NA         NA
+10 0.8596304  7.515101e-03        3 quad 0.68617086 0.68439781
+11 0.9905338  5.021588e-95        2 <NA>         NA         NA
+12 0.9905338 4.059320e-260        1 quad 0.77044148 0.76914454
+13 0.9905338  4.582536e-05        3 <NA>         NA         NA
+14 0.9870842  1.467752e-66        2 <NA>         NA         NA
+15 0.9870842 4.059320e-260        1 quad 0.63730725 0.63525813
+16 0.9870842  1.171936e-08        3   sl 0.96701676 0.96692385
+17 0.3616344  2.887449e-04        3   sl 0.03567688 0.03296047
+18 0.3616344  7.515101e-03        4 <NA>         NA         NA
+19 0.3616344  2.626142e-05        2 quad 0.12633668 0.12140073
+20 0.3616344  7.657209e-09        1 quad 0.27316969 0.26906330
+> ans$res.best
+         IrradTot YI      IAD1    IAD2    IAD2p   IAD3   
+IrradTot NA       List,12 List,12 NA      NA      List,12
+YI       NA       NA      NA      NA      NA      NA     
+IAD1     NA       List,12 NA      List,12 List,12 List,12
+IAD2     NA       List,12 List,12 NA      List,12 List,12
+IAD2p    NA       List,12 List,12 List,12 NA      List,12
+IAD3     NA       List,12 List,12 List,12 List,12 NA     
+attr(,"Step")
+         IrradTot  YI IAD1 IAD2 IAD2p IAD3
+IrradTot      Inf   1    2  Inf   Inf    2
+YI            Inf Inf  Inf  Inf   Inf  Inf
+IAD1          Inf   1  Inf    2     2    2
+IAD2          Inf   1    2  Inf     2    2
+IAD2p         Inf   1    2    2   Inf    2
+IAD3          Inf   1    2    2     2  Inf
+> ans$res.all
+     IrradTot YI      IAD1    IAD2    IAD2p   IAD3   
+[1,] NA       List,14 List,14 List,13 List,13 List,14
+attr(,"Step")
+IrradTot       YI     IAD1     IAD2    IAD2p     IAD3 
+       1        0        1        1        1        1 
+> attr(ans$res.best, "Step")
+         IrradTot  YI IAD1 IAD2 IAD2p IAD3
+IrradTot      Inf   1    2  Inf   Inf    2
+YI            Inf Inf  Inf  Inf   Inf  Inf
+IAD1          Inf   1  Inf    2     2    2
+IAD2          Inf   1    2  Inf     2    2
+IAD2p         Inf   1    2    2   Inf    2
+IAD3          Inf   1    2    2     2  Inf
+> attr(ans$res.all, "Step")
+IrradTot       YI     IAD1     IAD2    IAD2p     IAD3 
+       1        0        1        1        1        1 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("summary.sgSEMp1")
+> ### * summary.sgSEMp1
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: summary.sgSEMp1
+> ### Title: Summary of Semi-gSEM
+> ### Aliases: summary.sgSEMp1
+> 
+> ### ** Examples
+> 
+> data(acrylic)
+> ans <- sgSEMp1(acrylic)
+Working on  YI ~ IrradTot 
+Working on  YI ~ IAD1 
+Working on  YI ~ IAD2 
+Working on  YI ~ IAD2p 
+Working on  YI ~ IAD3 
+Working on  IAD1 ~ IrradTot 
+Working on  IAD1 ~ IAD2 
+Working on  IAD1 ~ IAD2p 
+Working on  IAD1 ~ IAD3 
+Working on  IAD2 ~ IrradTot 
+Working on  IAD2 ~ IAD1 
+Working on  IAD2 ~ IAD2p 
+Working on  IAD2 ~ IAD3 
+Working on  IAD2p ~ IrradTot 
+Working on  IAD2p ~ IAD1 
+Working on  IAD2p ~ IAD2 
+Working on  IAD2p ~ IAD3 
+Working on  IAD3 ~ IrradTot 
+Working on  IAD3 ~ IAD1 
+Working on  IAD3 ~ IAD2 
+Working on  IAD3 ~ IAD2p 
+> summary(ans)
+sgSEM principle 1 Done 
+
+Stressor: IrradTot 
+Response: YI 
+Intermediate variables: IAD1 IAD2 IAD2p IAD3 
+
+Chosen models:
+ [1] "IrradTot ---> YI | Quad (Adjusted R-square =  0.3315 )"   
+ [2] "IAD1 ---> YI | Exp (Adjusted R-square =  0.03537 )"       
+ [3] "IAD2 ---> YI | Quad (Adjusted R-square =  0.0437 )"       
+ [4] "IAD2p ---> YI | Quad (Adjusted R-square =  0.02149 )"     
+ [5] "IAD3 ---> YI | Quad (Adjusted R-square =  0.06016 )"      
+ [6] "IrradTot ---> IAD1 | Quad (Adjusted R-square =  0.02349 )"
+ [7] "IAD2 ---> IAD1 | nls (Adjusted R-square =  0.68659 )"     
+ [8] "IAD2p ---> IAD1 | nls (Adjusted R-square =  0.53583 )"    
+ [9] "IAD3 ---> IAD1 | Quad (Adjusted R-square =  0.22168 )"    
+[10] "IrradTot ---> IAD2 | Quad (Adjusted R-square =  0.00217 )"
+[11] "IAD1 ---> IAD2 | Quad (Adjusted R-square =  0.76914 )"    
+[12] "IAD2p ---> IAD2 | SL (Adjusted R-square =  0.96692 )"     
+[13] "IAD3 ---> IAD2 | Quad (Adjusted R-square =  0.56715 )"    
+[14] "IAD1 ---> IAD2p | Quad (Adjusted R-square =  0.63526 )"   
+[15] "IAD2 ---> IAD2p | SL (Adjusted R-square =  0.96692 )"     
+[16] "IAD3 ---> IAD2p | Quad (Adjusted R-square =  0.6513 )"    
+[17] "IrradTot ---> IAD3 | SL (Adjusted R-square =  0.03296 )"  
+[18] "IAD1 ---> IAD3 | Quad (Adjusted R-square =  0.1214 )"     
+[19] "IAD2 ---> IAD3 | Quad (Adjusted R-square =  0.26906 )"    
+[20] "IAD2p ---> IAD3 | Quad (Adjusted R-square =  0.31787 )"   
+> 
+> 
+> 
+> cleanEx()
+> nameEx("summary.sgSEMp2")
+> ### * summary.sgSEMp2
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: summary.sgSEMp2
+> ### Title: Summary of Semi-gSEM
+> ### Aliases: summary.sgSEMp2
+> 
+> ### ** Examples
+> 
+> data(acrylic)
+> ans <- sgSEMp2(acrylic)
+> summary(ans)
+sgSEM Done 
+
+Stressor: IrradTot 
+Response: YI 
+Intermediate variables: IAD1 IAD2 IAD2p IAD3 
+
+Chosen models:
+ [1] "IrradTot ---> YI | Model: YI ~ IrradTot + IAD1 + IAD2 + IAD2p + IAD3 (Adjusted R-square =  0.402 )"
+ [2] "IAD1 ---> YI | Model: YI ~ IrradTot + IAD1 + IAD2 + IAD2p + IAD3 (Adjusted R-square =  0.402 )"    
+ [3] "IAD2 ---> YI | Model: YI ~ IrradTot + IAD1 + IAD2 + IAD2p + IAD3 (Adjusted R-square =  0.402 )"    
+ [4] "IAD2p ---> YI | Model: YI ~ IrradTot + IAD1 + IAD2 + IAD2p + IAD3 (Adjusted R-square =  0.402 )"   
+ [5] "IAD3 ---> YI | Model: YI ~ IrradTot + IAD1 + IAD2 + IAD2p + IAD3 (Adjusted R-square =  0.402 )"    
+ [6] "IrradTot ---> IAD1 | Model: IAD1 ~ IrradTot + IAD2 + IAD2p + IAD3 (Adjusted R-square =  0.85963 )" 
+ [7] "IAD2 ---> IAD1 | Model: IAD1 ~ IrradTot + IAD2 + IAD2p + IAD3 (Adjusted R-square =  0.85963 )"     
+ [8] "IAD2p ---> IAD1 | Model: IAD1 ~ IrradTot + IAD2 + IAD2p + IAD3 (Adjusted R-square =  0.85963 )"    
+ [9] "IAD3 ---> IAD1 | Model: IAD1 ~ IrradTot + IAD2 + IAD2p + IAD3 (Adjusted R-square =  0.85963 )"     
+[10] "IAD1 ---> IAD2 | Model: IAD2 ~ IAD1 + IAD2p + IAD3 (Adjusted R-square =  0.99053 )"                
+[11] "IAD2p ---> IAD2 | Model: IAD2 ~ IAD1 + IAD2p + IAD3 (Adjusted R-square =  0.99053 )"               
+[12] "IAD3 ---> IAD2 | Model: IAD2 ~ IAD1 + IAD2p + IAD3 (Adjusted R-square =  0.99053 )"                
+[13] "IAD1 ---> IAD2p | Model: IAD2p ~ IAD1 + IAD2 + IAD3 (Adjusted R-square =  0.98708 )"               
+[14] "IAD2 ---> IAD2p | Model: IAD2p ~ IAD1 + IAD2 + IAD3 (Adjusted R-square =  0.98708 )"               
+[15] "IAD3 ---> IAD2p | Model: IAD2p ~ IAD1 + IAD2 + IAD3 (Adjusted R-square =  0.98708 )"               
+[16] "IrradTot ---> IAD3 | Model: IAD3 ~ IrradTot + IAD1 + IAD2 + IAD2p (Adjusted R-square =  0.36163 )" 
+[17] "IAD1 ---> IAD3 | Model: IAD3 ~ IrradTot + IAD1 + IAD2 + IAD2p (Adjusted R-square =  0.36163 )"     
+[18] "IAD2 ---> IAD3 | Model: IAD3 ~ IrradTot + IAD1 + IAD2 + IAD2p (Adjusted R-square =  0.36163 )"     
+[19] "IAD2p ---> IAD3 | Model: IAD3 ~ IrradTot + IAD1 + IAD2 + IAD2p (Adjusted R-square =  0.36163 )"    
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  5.627 0.156 7.57 0.003 0.003 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
